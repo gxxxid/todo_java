@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/cs4080Todo";
-    private static final String USER = "rt";
-    private static final String PASSWORD = "4080";
+    private static final String USER = "root";
+    private static final String PASSWORD = "3560";
 
     static {
         try {

@@ -20,10 +20,10 @@ public class EventDAO {
     private static final String GET_HISTORY_EVENTS =
             "SELECT * FROM Event WHERE nextOccurrence < ? ORDER BY nextOccurrence ASC;";
     private static final String ADD_EVENT = "INSERT INTO Event(eventTitle, eventDetail, startDate, " +
-            "repeat, repeatCycle, repeatIndex, nextOccurrence) " +
+            "`repeat`, repeatPeriod, repeatIndex, nextOccurrence) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
-    private static final String DELETE_EVENT_BY_ID = "DELETE * FROM Event WHERE eventIndex = ?;";
+    private static final String DELETE_EVENT_BY_ID = "DELETE FROM Event WHERE eventIndex = ?;";
 
 
     public Event getEventById(int eventId) {
@@ -64,7 +64,7 @@ public class EventDAO {
                     event.setEventDetail(rs.getString("eventDetail"));
                     event.setStartDate(rs.getTimestamp("startDate"));
                     event.setNextOccurrence(rs.getTimestamp("nextOccurrence"));
-                    event.setRepeat(rs.getBoolean("repeat"));
+                    event.setRepeat(rs.getBoolean("`repeat`"));
                     event.setRepeatPeriod(rs.getString("repeatPeriod"));
                     event.setRepeatIndex(rs.getInt("repeatIndex"));
                     events.add(event);
@@ -89,7 +89,7 @@ public class EventDAO {
                     event.setEventTitle(rs.getString("eventTitle"));
                     event.setEventDetail(rs.getString("eventDetail"));
                     event.setStartDate(rs.getTimestamp("startDate"));
-                    event.setRepeat(rs.getBoolean("repeat"));
+                    event.setRepeat(rs.getBoolean("`repeat`"));
                     event.setRepeatPeriod(rs.getString("repeatPeriod"));
                     event.setRepeatIndex(rs.getInt("repeatIndex"));
                     events.add(event);
@@ -158,7 +158,7 @@ public class EventDAO {
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(DELETE_EVENT_BY_ID)) {
             pstmt.setInt(1, eventId);
-            pstmt.executeQuery();
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
