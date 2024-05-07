@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" spacing="10" fx:controller="ToDo.src.EditPageController">
+    <TextField fx:id="titleField" promptText="Event Title"/>
+    <TextField fx:id="detailField" promptText="Event Details"/>
+    <Button text="Save" onAction="#saveEvent"/>
+</VBox>
